@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+// Admin
+Route::get('admin/home','AdminController@index');
+Route::get('admin','Admin\LoginController@showLoginForm')->name('admin.login');
+Route::post('admin','Admin\LoginController@login');
