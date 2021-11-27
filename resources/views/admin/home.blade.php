@@ -1,4 +1,5 @@
 @extends('admin.admin_master')
+@section('dashborad') active @endsection
 
 @section('backend_content')
 

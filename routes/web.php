@@ -24,8 +24,19 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-// Admin
+
+// ==========================Admin======================================
 Route::get('admin/home','AdminController@index');
 Route::get('admin','Admin\LoginController@showLoginForm')->name('admin.login');
 Route::post('admin','Admin\LoginController@login');
 Route::get('admin/logout','AdminController@Logout')->name('admin.logout');
+
+// ========================Category======================================
+Route::get('admin/category','Admin\CategoryController@Index')->name('admin.category');
+Route::post('admin/category/add','Admin\CategoryController@Store')->name('store.category');
+Route::get('admin/category/item/{id}','Admin\CategoryController@Edit');
+Route::post('admin/category/edit/item/{id}','Admin\CategoryController@Update');
+Route::get('admin/category/item/delete/{id}','Admin\CategoryController@Delete');
+Route::get('admin/category/item/inactive/{id}','Admin\CategoryController@Inactive');
+Route::get('admin/category/item/active/{id}','Admin\CategoryController@Active');
+

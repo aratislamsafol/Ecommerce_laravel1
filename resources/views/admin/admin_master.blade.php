@@ -34,7 +34,9 @@
     <link href="{{asset('backend')}}/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="{{asset('backend')}}/lib/Ionicons/css/ionicons.css" rel="stylesheet">
     <link href="{{asset('backend')}}/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
-
+    <link href="{{asset('backend')}}/lib/highlightjs/github.css" rel="stylesheet">
+    <link href="{{asset('backend')}}/lib/datatables/jquery.dataTables.css" rel="stylesheet">
+    <link href="{{asset('backend')}}/lib/select2/css/select2.min.css" rel="stylesheet">
 
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{asset('backend')}}/css/starlight.css">
@@ -57,7 +59,7 @@
       <label class="sidebar-label">Navigation</label>
       <div class="sl-sideleft-menu">
 
-        <a href="{{url('admin/home')}}" class="sl-menu-link">
+        <a href="{{url('admin/home')}}" class="sl-menu-link @yield('dashborad')">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
             <span class="menu-item-label">Dashboard</span>
@@ -71,7 +73,7 @@
             </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
 
-        <a href="{{url('/')}}" target="_blank" class="sl-menu-link">
+        <a href="{{route('admin.category')}}" class="sl-menu-link @yield('category')">
             <div class="sl-menu-item">
               <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
               <span class="menu-item-label">Category</span>
@@ -398,6 +400,36 @@
     <script src="{{asset('backend')}}/lib/popper.js/popper.js"></script>
     <script src="{{asset('backend')}}/lib/bootstrap/bootstrap.js"></script>
     <script src="{{asset('backend')}}/lib/jquery-ui/jquery-ui.js"></script>
+    <script src="{{asset('backend')}}/lib/highlightjs/highlight.pack.js"></script>
+    <script src="{{asset('backend')}}/lib/datatables/jquery.dataTables.js"></script>
+    <script src="{{asset('backend')}}/lib/datatables-responsive/dataTables.responsive.js"></script>
+    <script src="{{asset('backend')}}/lib/select2/js/select2.min.js"></script>
+
+    <script src="{{asset('backend')}}/js/starlight.js"></script>
+    <script>
+      $(function(){
+        'use strict';
+
+        $('#datatable1').DataTable({
+          responsive: true,
+          language: {
+            searchPlaceholder: 'Search...',
+            sSearch: '',
+            lengthMenu: '_MENU_ items/page',
+          }
+        });
+
+        $('#datatable2').DataTable({
+          bLengthChange: false,
+          searching: false,
+          responsive: true
+        });
+
+        // Select2
+        $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
+
+      });
+    </script>
     <script src="{{asset('backend')}}/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
     <script src="{{asset('backend')}}/lib/jquery.sparkline.bower/jquery.sparkline.min.js"></script>
     <script src="{{asset('backend')}}/lib/d3/d3.js"></script>
