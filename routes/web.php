@@ -53,3 +53,4 @@ Route::get('admin/brand/item/active/{id}','Admin\BrandController@Active');
 
 // =======================Product=========================================
 Route::get('admin/product/add','Admin\ProductController@AddProduct')->name('add.product');
+Route::post('admin/product/store','Admin\ProductController@StoreProduct')->name('admin.product.store');

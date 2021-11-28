@@ -37,6 +37,11 @@
     <link href="{{asset('backend')}}/lib/highlightjs/github.css" rel="stylesheet">
     <link href="{{asset('backend')}}/lib/datatables/jquery.dataTables.css" rel="stylesheet">
     <link href="{{asset('backend')}}/lib/select2/css/select2.min.css" rel="stylesheet">
+    <!-- summernote css -->
+    <link href="{{asset('backend')}}/lib/highlightjs/github.css" rel="stylesheet">
+    <link href="{{asset('backend')}}/lib/medium-editor/medium-editor.css" rel="stylesheet">
+    <link href="{{asset('backend')}}/lib/medium-editor/default.css" rel="stylesheet">
+    <link href="{{asset('backend')}}/lib/summernote/summernote-bs4.css" rel="stylesheet">
 
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{asset('backend')}}/css/starlight.css">
@@ -95,7 +100,7 @@
                 </a><!-- sl-menu-link -->
                 <ul class="sl-menu-sub nav flex-column">
                 <li class="nav-item"><a href="{{route('add.product')}}" class="nav-link @yield('add_products')">Add products</a></li>
-                <li class="nav-item"><a href="chart-flot.html" class="nav-link">Manage Products</a></li>
+                <li class="nav-item"><a href="" class="nav-link">Manage Products</a></li>
                 </ul>
             </div>
 
@@ -319,6 +324,8 @@
     @yield('backend_content');
     <!-- ########## END: MAIN PANEL ########## -->
 
+
+
     <script src="{{asset('backend')}}/lib/jquery/jquery.js"></script>
     <script src="{{asset('backend')}}/lib/popper.js/popper.js"></script>
     <script src="{{asset('backend')}}/lib/bootstrap/bootstrap.js"></script>
@@ -362,6 +369,28 @@
     <script src="{{asset('backend')}}/lib/Flot/jquery.flot.pie.js"></script>
     <script src="{{asset('backend')}}/lib/Flot/jquery.flot.resize.js"></script>
     <script src="{{asset('backend')}}/lib/flot-spline/jquery.flot.spline.js"></script>
+    <script src="{{asset('backend')}}/lib/medium-editor/medium-editor.js"></script>
+    <script src="{{asset('backend')}}/lib/summernote/summernote-bs4.min.js"></script>
+
+    <script>
+        $(function(){
+          'use strict';
+
+          // Inline editor
+          var editor = new MediumEditor('.editable');
+
+          // Summernote editor
+          $('#summernote').summernote({
+            height: 150,
+            tooltip: false
+          })
+
+          $('#summernote2').summernote({
+            height: 150,
+            tooltip: false
+          })
+        });
+      </script>
 
     <script src="{{asset('backend')}}/js/starlight.js"></script>
     <script src="{{asset('backend')}}/js/ResizeSensor.js"></script>

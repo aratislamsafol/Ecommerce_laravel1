@@ -113,7 +113,7 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card pd-20 pd-sm-40">
-                        <h6 class="card-body-title">All Brand DataTable</h6>
+                        <h6 class="card-body-title">Brand TrashTable</h6>
 
                         <div class="table-wrapper">
                             @if (session('delete'))
