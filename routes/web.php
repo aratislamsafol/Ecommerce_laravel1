@@ -40,3 +40,16 @@ Route::get('admin/category/item/delete/{id}','Admin\CategoryController@Delete');
 Route::get('admin/category/item/inactive/{id}','Admin\CategoryController@Inactive');
 Route::get('admin/category/item/active/{id}','Admin\CategoryController@Active');
 
+// ========================Brand======================================
+Route::get('admin/brand','Admin\BrandController@Index')->name('admin.brand');
+Route::post('admin/brand/add','Admin\BrandController@AddBrand')->name('add.brand');
+Route::get('admin/brand/item/{id}','Admin\BrandController@Edit');
+Route::post('admin/brand/edit/item/{id}','Admin\BrandController@Update');
+Route::get('admin/brand/item/delete/{id}','Admin\BrandController@Delete');
+Route::get('admin/brand/item/restore/{id}','Admin\BrandController@Restore');
+Route::get('admin/brand/item/p_delete/{id}','Admin\BrandController@PDelete');
+Route::get('admin/brand/item/inactive/{id}','Admin\BrandController@Inactive');
+Route::get('admin/brand/item/active/{id}','Admin\BrandController@Active');
+
+// =======================Product=========================================
+Route::get('admin/product/add','Admin\ProductController@AddProduct')->name('add.product');
