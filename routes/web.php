@@ -63,3 +63,11 @@ Route::get('admin/product/delete/{id}','Admin\ProductController@Delete');
 Route::get('admin/brand/item/inactive/{id}','Admin\ProductController@Inactive');
 Route::get('admin/brand/item/active/{id}','Admin\ProductController@Active');
 
+// =======================Coupon=========================================
+Route::get('admin/coupon','Admin\CouponController@Index')->name('admin.coupon');
+Route::post('admin/coupon/add','Admin\CouponController@AddCoupon')->name('store.coupon');
+Route::get('admin/coupon/item/{id}','Admin\CouponController@Edit');
+Route::post('admin/coupon/edit/item/{id}','Admin\CouponController@Update');
+Route::get('admin/coupon/item/delete/{id}','Admin\CouponController@Delete');
+Route::get('admin/coupon/item/inactive/{id}','Admin\CouponController@Inactive');
+Route::get('admin/coupon/item/active/{id}','Admin\CouponController@Active');
