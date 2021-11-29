@@ -1,5 +1,7 @@
 @extends('admin.admin_master')
-@section('product') active @endsection
+@section('product') active show-sub @endsection
+@section('add_products') active @endsection
+
 @section('backend_content')
 
 <div class="sl-mainpanel">

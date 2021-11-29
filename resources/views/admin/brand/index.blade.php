@@ -31,7 +31,7 @@
                                 <strong>{{session('status-Inactive')}}</strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                        @endif
+                            @endif
                             <table id="datatable1" class="table display responsive nowrap">
                                 <thead>
                                 <tr>

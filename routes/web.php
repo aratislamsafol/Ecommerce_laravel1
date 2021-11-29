@@ -52,5 +52,14 @@ Route::get('admin/brand/item/inactive/{id}','Admin\BrandController@Inactive');
 Route::get('admin/brand/item/active/{id}','Admin\BrandController@Active');
 
 // =======================Product=========================================
+// Add Product
 Route::get('admin/product/add','Admin\ProductController@AddProduct')->name('add.product');
 Route::post('admin/product/store','Admin\ProductController@StoreProduct')->name('admin.product.store');
+// manage Product
+Route::get('admin/product/show','Admin\ProductController@ShowProduct')->name('manage.product');
+Route::get('admin/product/edit/{id}','Admin\ProductController@Edit');
+Route::post('admin/brand/edit/item/{id}','Admin\ProductController@Update');
+Route::get('admin/product/delete/{id}','Admin\ProductController@Delete');
+Route::get('admin/brand/item/inactive/{id}','Admin\ProductController@Inactive');
+Route::get('admin/brand/item/active/{id}','Admin\ProductController@Active');
+

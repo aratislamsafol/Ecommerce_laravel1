@@ -100,7 +100,7 @@
                 </a><!-- sl-menu-link -->
                 <ul class="sl-menu-sub nav flex-column">
                 <li class="nav-item"><a href="{{route('add.product')}}" class="nav-link @yield('add_products')">Add products</a></li>
-                <li class="nav-item"><a href="" class="nav-link">Manage Products</a></li>
+                <li class="nav-item"><a href="{{ route('manage.product') }}" class="nav-link @yield('manage.product')">Manage Products</a></li>
                 </ul>
             </div>
 
