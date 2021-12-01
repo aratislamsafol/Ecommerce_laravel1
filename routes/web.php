@@ -71,3 +71,4 @@ Route::post('admin/coupon/edit/item/{id}','Admin\CouponController@Update');
 Route::get('admin/coupon/item/delete/{id}','Admin\CouponController@Delete');
 Route::get('admin/coupon/item/inactive/{id}','Admin\CouponController@Inactive');
 Route::get('admin/coupon/item/active/{id}','Admin\CouponController@Active');
+
