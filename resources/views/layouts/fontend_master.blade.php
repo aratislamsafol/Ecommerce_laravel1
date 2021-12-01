@@ -126,7 +126,15 @@
                 </div>
             </div>
         </div>
+
         <div class="container">
+            @if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{session('success')}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
@@ -154,6 +162,9 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
+                            @php
+                                $total=Cart::
+                            @endphp
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
                             <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                         </ul>
