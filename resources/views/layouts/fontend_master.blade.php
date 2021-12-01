@@ -161,14 +161,19 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="header__cart">
+                        @php
+
+                            $total=App\Cart::all()->where('user_ip',request()->ip())->sum(function($res){
+                                return $res->product_qty * $res->price;
+                            });
+                            $quantity=App\Cart::all()->where('user_ip',request()->ip())->sum('product_qty');
+                         @endphp
                         <ul>
-                            @php
-                                $total=Cart::
-                            @endphp
+
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>{{$quantity}}</span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price">item: <span>{{$total}}</span></div>
                     </div>
                 </div>
             </div>
