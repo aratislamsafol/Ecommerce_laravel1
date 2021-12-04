@@ -24,11 +24,18 @@
                             <form action="{{url('admin/coupon/edit/item/'.$coupon_id->id)}}" method="POST">
                                 @csrf
                                 <div class="mb-3">
-                                <label for="Coupons" class="form-label">Coupon Name</label>
-                                <input type="text" name="coupon_name" value="{{$coupon_id->coupon_name}}" class="form-control @error('coupon_name') is-invalid @enderror" id="Coupons" placeholder="Please Input Coupon Name" aria-describedby="CouponsHelp">
-                                @error('coupon_name')
-                                    <span class="text-danger">{{$message}}</span>
-                                @enderror
+                                    <label for="Coupons" class="form-label">Coupon Name</label>
+                                    <input type="text" name="coupon_name" value="{{$coupon_id->coupon_name}}" class="form-control @error('coupon_name') is-invalid @enderror" id="Coupons" placeholder="Please Input Coupon Name" aria-describedby="CouponsHelp">
+                                    @error('coupon_name')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Coupon" class="form-label">Coupon Discount</label>
+                                    <input type="text" name="discount" value="{{$coupon_id->discount}}" class="form-control @error('discount') is-invalid @enderror" id="Coupons" placeholder="Please Input Coupon Discount" aria-describedby="CouponHelp">
+                                    @error('discount')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-sm">Update</button>
                             </form>

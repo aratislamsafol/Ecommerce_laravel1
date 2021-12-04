@@ -9,4 +9,8 @@ class Cart extends Model
     protected $fillable = [
         'product_id','product_qty', 'price','user_ip',
     ];
+
+    public function product(){
+        return $this->hasOne(Product::class,'id','product_id');
+    }
 }

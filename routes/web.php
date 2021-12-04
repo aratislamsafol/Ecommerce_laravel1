@@ -74,4 +74,7 @@ Route::get('admin/coupon/item/active/{id}','Admin\CouponController@Active');
 
 // =========================Cart================================================
 Route::post('product/shopping/cart/add/{id}','CartController@AddCart');
+Route::get('cart','CartController@ShowCart');
+Route::get('cart/destroy/{id}','CartController@Remove');
+Route::post('cart/item/update/{id}','CartController@UpdateCart');
 

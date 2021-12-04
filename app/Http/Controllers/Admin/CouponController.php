@@ -27,11 +27,13 @@ class CouponController extends Controller
         [
             'coupon_name.required'=>'please Valid Input coupon Name',
             'coupon_name.max'=>'Maximum 255 Chars category Name',
+            'discount.required'=>'Please Enter Valid Cupon Code',
         ]
     );
 
     Coupon::insert([
         'coupon_name'=>$request->coupon_name,
+        'discount'=>$request->discount,
         'created_at'=>Carbon::now()
     ]);
     return Redirect()->back()->with('success','Coupon Inserted Successfully');
@@ -46,7 +48,7 @@ class CouponController extends Controller
     public function Update(Request $request,$id){
         $coupon_id=Coupon::find($id)->Update([
             'coupon_name'=>$request->coupon_name,
-
+            'discount'=>$request->discount,
             'updated_at'=>Carbon::now(),
         ]);
         return Redirect()->route('admin.coupon')->with('success','Coupon Updated Successfully');

@@ -39,6 +39,7 @@
                                 <tr>
                                     <th class="wd-15p">SL No</th>
                                     <th class="wd-20p">Coupon Name</th>
+                                    <th class="wd-15p">Discount</th>
                                     <th class="wd-15p">Status</th>
                                     <th class="wd-25p">Created At</th>
                                     <th class="wd-25p">Action</th>
@@ -49,6 +50,7 @@
                                     <tr>
                                         <td>{{$coupon_show->firstItem()+$loop->index}}</td>
                                         <td>{{$coupon->coupon_name}}</td>
+                                        <td>{{$coupon->discount}}</td>
                                         <td>
                                             @if ($coupon->status==1)
                                             <span class="badge badge-success">Active</span>
@@ -91,11 +93,18 @@
                             <form action="{{route('store.coupon')}}" method="POST">
                                 @csrf
                                 <div class="mb-3">
-                                <label for="Coupon" class="form-label">Category Name</label>
-                                <input type="text" name="coupon_name" class="form-control @error('coupon_name') is-invalid @enderror" id="coupon" placeholder="Please Input Coupon Name" aria-describedby="CouponHelp">
-                                @error('coupon_name')
-                                    <span class="text-danger">{{$message}}</span>
-                                @enderror
+                                    <label for="Coupon" class="form-label">Coupon Name</label>
+                                    <input type="text" name="coupon_name" class="form-control @error('coupon_name') is-invalid @enderror" id="coupon" placeholder="Please Input Coupon Name" aria-describedby="CouponHelp">
+                                    @error('coupon_name')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Coupon" class="form-label">Coupon Discount</label>
+                                    <input type="text" name="discount" class="form-control @error('discount') is-invalid @enderror" id="coupon" placeholder="Please Input Coupon Discount" aria-describedby="CouponHelp">
+                                    @error('discount')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-sm">ADD</button>
                             </form>
