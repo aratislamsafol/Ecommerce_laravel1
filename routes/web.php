@@ -77,4 +77,6 @@ Route::post('product/shopping/cart/add/{id}','CartController@AddCart');
 Route::get('cart','CartController@ShowCart');
 Route::get('cart/destroy/{id}','CartController@Remove');
 Route::post('cart/item/update/{id}','CartController@UpdateCart');
+// Cart Coupon
+Route::Get('cart/cuppon/apply','CartController@ApplyCoupon');
 

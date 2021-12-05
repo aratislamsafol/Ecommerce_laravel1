@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Coupon;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CartController extends Controller
 {
@@ -44,5 +47,22 @@ class CartController extends Controller
             'product_qty'=> $request->product_qty
         ]);
         return Redirect()->back();
+    }
+
+    // ===============Cart Coupon===============
+
+    public function ApplyCoupon(Request $request){
+        $check=Coupon::where('coupon_name',$request->coupon_name)->first();
+
+        if($check){
+
+        Session::put('coupon',[
+            'coupon_name'=>$check->coupon_name,
+            'discount_rate'=>$check->discount
+        ]);
+           return Redirect()->back()->with('success','Coupon Added Successfully');
+        }else{
+            return Redirect()->back()->with('Fail','Wrong Coupon');
+        }
     }
 }

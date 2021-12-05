@@ -1,6 +1,14 @@
 @extends('layouts.fontend_master')
 @section('fontend_content')
 <!-- Hero Section Begin -->
+
+@if (session('Fail'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>{{session('Fail')}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
 <section class="hero hero-normal">
     <div class="container">
         <div class="row">
@@ -47,6 +55,7 @@
     </div>
 </section>
 <!-- Hero Section End -->
+
 
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="{{asset('fontend')}}/img/breadcrumb.jpg">
@@ -131,22 +140,32 @@
                 </div>
             </div>
             <div class="col-lg-6">
+                @if (Session::has('coupon'))
+                @else
                 <div class="shoping__continue">
                     <div class="shoping__discount">
                         <h5>Discount Codes</h5>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your coupon code">
+                        <form action="{{url('cart/cuppon/apply')}}" method="GET">
+                            <input type="text" name="coupon_name" placeholder="Enter your coupon code">
                             <button type="submit" class="site-btn">APPLY COUPON</button>
                         </form>
                     </div>
                 </div>
+                @endif
             </div>
             <div class="col-lg-6">
                 <div class="shoping__checkout">
                     <h5>Cart Total</h5>
                     <ul>
+                        @if (Session::has('coupon'))
                         <li>Subtotal <span>{{$sub_total}}tk</span></li>
-                        <li>Total <span>$454.98</span></li>
+                        <li>Subtotal <span>{{session()->get('coupon')['discount_rate']}}% (
+                            {{$discount=$sub_total*session()->get('coupon')['discount_rate']/100}}
+                        )</span></span></li>
+                        @else
+                        <li>Subtotal <span>{{$sub_total}}tk</span></li>
+                        @endif
+                        <li>Total <span>{{$sub_total-$discount}}tk</span></li>
                     </ul>
                     <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
                 </div>
