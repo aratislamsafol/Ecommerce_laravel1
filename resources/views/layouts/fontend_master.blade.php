@@ -20,7 +20,9 @@
     <link rel="stylesheet" href="{{asset('fontend')}}/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="{{asset('fontend')}}/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="{{asset('fontend')}}/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="{{asset('fontend')}}/css/login.css" type="text/css">
     <link rel="stylesheet" href="{{asset('fontend')}}/css/style.css" type="text/css">
+
 </head>
 
 <body>
@@ -119,7 +121,18 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                                @auth
+                                <a href="{{route('home')}}" style="border:none; background:#F5F5F5">
+                                    <i class="fa fa-user"></i> My Account
+                                </a>
+                                @else
+                                <a href="{{route('login')}}" style="border:none; background:#F5F5F5">
+                                    <i class="fa fa-user"></i> Login
+                                </a>
+                                @endauth
+                                {{-- <button type="button" data-bs-target="login_modal" data-bs-toggle="modal"><i class="fa fa-user"></i> Login</button> --}}
+
+
                             </div>
                         </div>
                     </div>
@@ -167,10 +180,10 @@
                                 return $res->product_qty * $res->price;
                             });
                             $quantity=App\Cart::all()->where('user_ip',request()->ip())->sum('product_qty');
+                            $wishlist=App\Wishlist::where('user_id',Auth::id())->get();
                          @endphp
                         <ul>
-
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                            <li><a href="{{url('product/show/wishlist')}}"><i class="fa fa-heart"></i> <span>{{count($wishlist)}}</span></a></li>
                             <li><a href="{{url('cart')}}"><i class="fa fa-shopping-bag"></i> <span>{{$quantity}}</span></a></li>
                         </ul>
                         <div class="header__cart__price">item: <span>{{$total}}tk</span></div>
@@ -244,18 +257,91 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="footer__copyright">
-                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
-                        <div class="footer__copyright__payment"><img src="{{asset('fontend')}}/img/payment-item.png" alt=""></div>
-                    </div>
+
                 </div>
             </div>
         </div>
     </footer>
-    <!-- Footer Section End -->
 
+    <!-- Modal -->
+    {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+
+                    <div class="form-group row">
+                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-6 offset-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                <label class="form-check-label" for="remember">
+                                    {{ __('Remember Me') }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-0">
+                        <div class="col-md-8 offset-md-4">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Login') }}
+                            </button>
+
+                            @if (Route::has('password.request'))
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-sm btn-success"> {{ __('Login') }}</button>
+            </div>
+          </div>
+        </div>
+      </div> --}}
+    <!-- Complete Modal -->
+
+    <!-- Footer Section End -->
     <!-- Js Plugins -->
     <script src="{{asset('fontend')}}/js/jquery-3.3.1.min.js"></script>
     <script src="{{asset('fontend')}}/js/bootstrap.min.js"></script>

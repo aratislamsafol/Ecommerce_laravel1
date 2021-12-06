@@ -80,3 +80,12 @@ Route::post('cart/item/update/{id}','CartController@UpdateCart');
 // Cart Coupon
 Route::Get('cart/cuppon/apply','CartController@ApplyCoupon');
 
+// ============================Wishlist==============================================
+Route::get('product/add/wishlist/{id}','WishlistController@AddWishlist');
+Route::get('product/show/wishlist','WishlistController@ShowWishlist');
+Route::get('wl/destroy/{id}','WishlistController@Remove');
+
+// ============================ Product Details ============================================
+Route::get('product/details/{id}','FontendController@ProductDetails');
+Route::get('coupon/destroy','CartController@CouponDestroy');
+

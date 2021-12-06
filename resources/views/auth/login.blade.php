@@ -1,73 +1,145 @@
 @extends('layouts.app')
-
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{asset('fontend')}}/css/login.css" type="text/css">
+    <title>Login</title>
+</head>
+<body>
+    <div id="logreg-forms">
+        <form class="form-signin" method="POST" action="{{ route('login') }}">
+            @csrf
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
+            <div class="social-login">
+                <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
+                <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
             </div>
-        </div>
+            <p style="text-align:center"> OR  </p>
+            <div class="col-md-12 m-0 p-0">
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Please Input Email" autofocus>
+
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="col-md-12 m-0 p-0">
+                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Please Input Password" required autocomplete="current-password">
+
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>
+
+            @if (Route::has('password.request'))
+                <a class="btn btn-link" href="{{ route('password.request') }}" >
+                    {{ __('Forgot Your Password?') }}
+                </a>
+            @endif
+
+            <hr>
+            <!-- <p>Don't have an account!</p>  -->
+            <button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Sign up New Account</button>
+            </form>
+
+            <form action="/reset/password/" class="form-reset">
+                <input type="email" id="resetEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+                <button class="btn btn-primary btn-block" type="submit">Reset Password</button>
+                <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
+            </form>
+
+            <form method="POST" class="form-signup" action="{{ route('register') }}">
+                @csrf
+                <div class="social-login">
+                    <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign up with Facebook</span> </button>
+                </div>
+                <div class="social-login">
+                    <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign up with Google+</span> </button>
+                </div>
+
+                <p style="text-align:center">OR</p>
+                <div class="col-md-12">
+                    <input id="name" id="user-name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Full name" required autocomplete="name" autofocus>
+
+                    @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="col-md-12">
+                    <input id="email" id="user-email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Input Email Address" value="{{ old('email') }}" required autocomplete="email">
+
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="col-md-12">
+                    <input id="password"  id="user-pass" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Input Password" required autocomplete="new-password">
+
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="col-md-12">
+                    <input id="password-confirm" id="user-repeatpass" type="password" class="form-control" name="password_confirmation" placeholder="Input Confirm Password" required autocomplete="new-password">
+                </div>
+
+                <div class="col-md-6 offset-md-4">
+                    <button type="submit" class="btn btn-primary">
+                        Sign Up
+                    </button>
+                </div>
+
+                <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
+            </form>
+            <br>
+
     </div>
-</div>
+    {{-- <p style="text-align:center">
+        <a href="http://bit.ly/2RjWFMfunction toggleResetPswd(e){
+    e.preventDefault();
+    $('#logreg-forms .form-signin').toggle() // display:block or none
+    $('#logreg-forms .form-reset').toggle() // display:block or none
+}
+
+function toggleSignUp(e){
+    e.preventDefault();
+    $('#logreg-forms .form-signin').toggle(); // display:block or none
+    $('#logreg-forms .form-signup').toggle(); // display:block or none
+}
+
+$(()=>{
+    // Login Register Form
+    $('#logreg-forms #forgot_pswd').click(toggleResetPswd);
+    $('#logreg-forms #cancel_reset').click(toggleResetPswd);
+    $('#logreg-forms #btn-signup').click(toggleSignUp);
+    $('#logreg-forms #cancel_signup').click(toggleSignUp);
+})g" target="_blank" style="color:black">By Artin</a>
+    </p> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="{{asset('fontend')}}/js/login.js"></script>
+</body>
+</html>
 @endsection
+
+

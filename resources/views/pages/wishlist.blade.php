@@ -63,10 +63,10 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
-                    <h2>Shopping Cart</h2>
+                    <h2>WishList</h2>
                     <div class="breadcrumb__option">
                         <a href="{{url('/')}}">Home</a>
-                        <span>Shopping Cart</span>
+                        <span>WishList</span>
                     </div>
                 </div>
             </div>
@@ -86,41 +86,36 @@
                             <tr>
                                 <th class="shoping__product">Products</th>
                                 <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
+                                <th>Cart</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($carts as $cart)
+                            @foreach ($wishlist as $wl)
                             <tr>
                                 <td class="shoping__cart__item">
-                                    <img src="{{$cart->product->image_one}}" style="height:80px; width:80px" alt="Cart Image">
-                                    <h5>{{$cart->product->product_name}}</h5>
+                                    <img src="{{asset($wl->product->image_one)}}" style="height:80px; width:80px" alt="wish Image">
+                                    <h5>{{$wl->product->product_name}}</h5>
                                 </td>
                                 <td class="shoping__cart__price">
-                                    {{$cart->product->price}}
+                                    {{$wl->product->price}}
+                                </td>
+                                <td>
+                                    <form action="{{ url('product/shopping/cart/add/'.$wl->product_id)}}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="price" value="{{$wl->product->price}}">
+                                        <input type="hidden" name="product_id" value="{{$wl->product->id}}">
+                                        <button class="btn -sm btn btn-danger" type="submit"><i class="fa fa-shopping-cart">Add to Cart</i></button>
+                                    </form>
                                 </td>
 
-                                <td class="shoping__cart__quantity">
 
-                                    <div class="quantity">
-                                        <form action="{{url('cart/item/update/'.$cart->id)}}" method="POST">
-                                            @csrf
-                                            <div class="pro-qty">
-                                                <input type="text" value={{$cart->product_qty}} name="product_qty">
-                                            </div>
-                                            <button type="submit" class="btn btn-sm"><i class="fa fa-history"></i></button>
-                                        </form>
-                                    </div>
-
-                                </td>
-                                <td class="shoping__cart__total">
+                                {{-- <td class="shoping__cart__total">
                                     {{$cart->price * $cart->product_qty}}
-                                </td>
+                                </td> --}}
                                 <td class="shoping__cart__item__close">
 
-                                        <a href="{{url('cart/destroy/'.$cart->id)}}"><span class="icon_close"> </span></a>
+                                        <a href="{{url('wl/destroy/'.$wl->id)}}"><span class="icon_close"> </span></a>
 
                                 </td>
                             </tr>
@@ -130,48 +125,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="shoping__cart__btns">
-                    <a href="{{url('/')}}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
 
-                    {{-- <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                        Upadate Cart</a> --}}
-                </div>
-            </div>
-            <div class="col-lg-6">
-                @if (Session::has('coupon'))
-                @else
-                <div class="shoping__continue">
-                    <div class="shoping__discount">
-                        <h5>Discount Codes</h5>
-                        <form action="{{url('cart/cuppon/apply')}}" method="GET">
-                            <input type="text" name="coupon_name" placeholder="Enter your coupon code">
-                            <button type="submit" class="site-btn">APPLY COUPON</button>
-                        </form>
-                    </div>
-                </div>
-                @endif
-            </div>
-            <div class="col-lg-6">
-                <div class="shoping__checkout">
-                    <h5>Cart Total</h5>
-                    <ul>
-                        @if (Session::has('coupon'))
-                        <li>Subtotal <span>{{$sub_total}}tk</span></li>
-                        <li>Coupon Name <span>{{session()->get('coupon')['coupon_name']}} <a href="{{url('coupon/destroy')}}"><i class="fa fa-times"></i></a></span></li>
-                        <li>Discount <span>{{session()->get('coupon')['discount_rate']}}% (
-                            {{$discount=$sub_total*session()->get('coupon')['discount_rate']/100}}
-                        )</span></span></li>
-                        <li>Total <span>${{$sub_total - $discount}} tk</span></li>
-                        @else
-                        <li>Subtotal <span>{{$sub_total}}tk</span></li>
-                        @endif
-                    </ul>
-                    <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 @endsection

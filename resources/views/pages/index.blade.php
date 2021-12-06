@@ -111,7 +111,7 @@
                             <div class="featured__item">
                                 <div class="featured__item__pic set-bg" data-setbg="{{asset($product->image_one)}}">
                                     <ul class="featured__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="{{url('product/add/wishlist/'.$product->id)}}"><i class="fa fa-heart"></i></a></li>
                                         <li><a href=""><i class="fa fa-retweet"></i></a></li>
                                         <form action="{{ url('product/shopping/cart/add/'.$product->id)}}" method="post">
                                             @csrf
@@ -122,7 +122,7 @@
                                     </ul>
                                 </div>
                                 <div class="featured__item__text">
-                                    <h6><a href="#">{{$product->product_name}}</a></h6>
+                                    <h6><a href="{{'product/details/'.$product->id}}">{{$product->product_name}}</a></h6>
                                     <h5>price:{{$product->price}}Tk</h5>
                                 </div>
                             </div>

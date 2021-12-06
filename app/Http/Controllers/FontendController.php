@@ -17,4 +17,12 @@ class FontendController extends Controller
 
         return view('pages.index',compact('categories','products','lts','lts2'));
     }
+
+    // =============== Product Details ====================
+     public function ProductDetails($product_id){
+        $product_details=Product::findOrfail($product_id);
+        $categories_id=$product_details->category_id;
+        $related_pro=Product::where('category_id',$categories_id)->where('id','!=',$product_id)->latest()->get();
+        return view('pages.product_details',compact('product_details','related_pro'));
+     }
 }

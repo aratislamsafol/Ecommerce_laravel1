@@ -7,25 +7,28 @@ use App\Coupon;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
     public function AddCart(Request $request){
-        $check=Cart::where('product_id',$request->product_id)->first();
-        if($check){
-            Cart::where('product_id',$request->product_id)->increment('product_qty');
-            return Redirect()->back()->with('success','Product Added');
-
+        $checks=Cart::where('product_id',$request->product_id)->first();
+        if(Auth::check()){
+            if($checks){
+                Cart::where('product_id',$request->product_id)->increment('product_qty');
+                return Redirect()->back()->with('success','Product Added');
+            }else{
+                Cart::insert([
+                    'product_id'=>$request->product_id,
+                    'product_qty'=>1,
+                    'price'=>$request->price,
+                    'user_ip'=>request()->ip(),
+                ]);
+                return Redirect()->back()->with('success','Product Added');
+            }
         }else{
-            Cart::insert([
-                'product_id'=>$request->product_id,
-                'product_qty'=>1,
-                'price'=>$request->price,
-                'user_ip'=>request()->ip(),
-            ]);
-            return Redirect()->back()->with('success','Product Added');
+            return Redirect()->route('login')->with('fail','Login First');
         }
-
     }
 
     public function ShowCart(){
@@ -64,5 +67,13 @@ class CartController extends Controller
         }else{
             return Redirect()->back()->with('Fail','Wrong Coupon');
         }
+    }
+
+    public function CouponDestroy(){
+        if(Session::has('coupon')){
+            Session::forget('coupon');
+            return Redirect()->back()->with('success','Coupon Removed Successfully');
+        }
+
     }
 }
