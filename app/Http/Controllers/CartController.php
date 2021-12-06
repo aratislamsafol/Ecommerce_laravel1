@@ -6,14 +6,12 @@ use App\Cart;
 use App\Coupon;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
     public function AddCart(Request $request){
         $checks=Cart::where('product_id',$request->product_id)->first();
-        if(Auth::check()){
+
             if($checks){
                 Cart::where('product_id',$request->product_id)->increment('product_qty');
                 return Redirect()->back()->with('success','Product Added');
@@ -26,9 +24,7 @@ class CartController extends Controller
                 ]);
                 return Redirect()->back()->with('success','Product Added');
             }
-        }else{
-            return Redirect()->route('login')->with('fail','Login First');
-        }
+
     }
 
     public function ShowCart(){

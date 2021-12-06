@@ -168,7 +168,7 @@
                         <li>Subtotal <span>{{$sub_total}}tk</span></li>
                         @endif
                     </ul>
-                    <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                    <a href="{{url('checkout')}}" class="primary-btn">PROCEED TO CHECKOUT</a>
                 </div>
             </div>
         </div>

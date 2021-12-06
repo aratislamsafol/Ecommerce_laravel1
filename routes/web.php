@@ -89,3 +89,5 @@ Route::get('wl/destroy/{id}','WishlistController@Remove');
 Route::get('product/details/{id}','FontendController@ProductDetails');
 Route::get('coupon/destroy','CartController@CouponDestroy');
 
+// ============================ Checkout ============================================
+Route::get('checkout','CheckoutController@Index');
