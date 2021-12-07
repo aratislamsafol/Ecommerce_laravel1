@@ -91,3 +91,4 @@ Route::get('coupon/destroy','CartController@CouponDestroy');
 
 // ============================ Checkout ============================================
 Route::get('checkout','CheckoutController@Index');
+Route::post('shipping/place/order','che')->name('shipping.place_order');
