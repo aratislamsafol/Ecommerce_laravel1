@@ -78,23 +78,36 @@
 <!-- Checkout Section Begin -->
 <section class="checkout spad">
     <div class="container">
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{session('success')}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class=Checkout>
             <div class="checkout__form">
                 <h4>Shipping Address</h4>
-                <form action="{{route('shipping.place_order')}}" method="POST">
+                <form action="{{url('place/order')}}" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Fist Name<span>*</span></p>
-                                        <input type="text" value={{Auth::user()->name}} name="shipping_first_name">
+                                        <input type="text" value={{Auth::user()->name}} name="shipping_first_name" class="@error('shipping_first_name') is-invalid @enderror">
+                                        @error('shipping_first_name')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Last Name<span>*</span></p>
-                                        <input type="text" name="shipping_last_name">
+                                        <input type="text" name="shipping_last_name" class="@error('shipping_last_name') is-invalid @enderror">
+                                        @error('shipping_last_name')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -102,23 +115,35 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Phone<span>*</span></p>
-                                        <input type="text" name="shipping_phone">
+                                        <input type="text" name="shipping_phone" class="@error('shipping_phone') is-invalid @enderror">
+                                        @error('shipping_phone')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Email<span>*</span></p>
-                                        <input type="text" value={{Auth::user()->email}}  name="shipping_email">
+                                        <input type="text" value={{Auth::user()->email}}  name="shipping_email" class="@error('shipping_email') is-invalid @enderror">
+                                        @error('shipping_email')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
                             <div class="checkout__input">
                                 <p>Country<span>*</span></p>
                                 <input type="text" name="shipping_state">
+                                @error('shipping_state')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
                             </div>
                             <div class="checkout__input">
                                 <p>Address<span>*</span></p>
                                 <input type="text" placeholder="Street Address" name="shipping_address" class="checkout__input__add">
+                                @error('shipping_address')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
 
                             </div>
                             {{-- <div class="checkout__input">
@@ -132,6 +157,9 @@
                             <div class="checkout__input">
                                 <p>Postcode / ZIP<span>*</span></p>
                                 <input type="text" name="post_code">
+                                @error('post_code')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
 
                             {{-- <div class="checkout__input">
@@ -159,21 +187,28 @@
                                 </ul>
                                 @if (Session::has('coupon'))
                                 <div class="checkout__order__total">Total <span>{{$sub_total-$sub_total*session()->get('coupon')['discount_rate']/100}}</span></div>
+                                <input type="hidden" name="coupon_discount" value="{{session()->get('coupon')['discount_rate']}}">
+                                <input type="hidden" name="subtotal" value="${{$sub_total}}">
+                                <input type="hidden" name="total" value="${{$sub_total-$sub_total*session()->get('coupon')['discount_rate']/100}}">
                                 @else
-                                <div class="checkout__order__subtotal">Subtotal <span>{{$sub_total}}tk</span></div>
+
+                                <div class="checkout__order__subtotal">Subtotal <span>${{$sub_total}}tk</span></div>
+                                <input type="hidden" name="subtotal" value="${{$sub_total}}">
+                                <input type="hidden" name="total" value="${{$sub_total}}">
                                 @endif
+
                                 <h4>Select Payment Method</h4>
                                 <div class="checkout__input__checkbox">
                                     <label for="payment">
-                                        Check Payment
-                                        <input type="checkbox" id="payment">
+                                        cash_on_delivery
+                                        <input type="checkbox" id="payment" value="cash_on_delivery" name="payment_type">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
                                 <div class="checkout__input__checkbox">
                                     <label for="paypal">
                                         Paypal
-                                        <input type="checkbox" id="paypal">
+                                        <input type="checkbox" id="paypal" value="Paypal" name="payment_type">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>

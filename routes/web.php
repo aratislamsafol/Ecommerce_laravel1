@@ -91,4 +91,8 @@ Route::get('coupon/destroy','CartController@CouponDestroy');
 
 // ============================ Checkout ============================================
 Route::get('checkout','CheckoutController@Index');
-Route::post('shipping/place/order','che')->name('shipping.place_order');
+
+// ============================ Order Data ==========================================
+Route::post('place/order','OrderController@StoreData');
+Route::get('order/success','OrderController@SuccessPages');
+
