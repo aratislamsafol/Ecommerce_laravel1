@@ -73,4 +73,6 @@ class CouponController extends Controller
         ]);
         return Redirect()->back()->with('status-Inactive','Coupon Item Actived');
     }
+
+
 }
