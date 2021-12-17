@@ -61,7 +61,7 @@
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 <li class="active"><a href="./index.html">Home</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
+                <li><a href="{{route('shop.pages')}}">Shop</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="./shop-details.html">Shop Details</a></li>
@@ -131,8 +131,6 @@
                                 </a>
                                 @endauth
                                 {{-- <button type="button" data-bs-target="login_modal" data-bs-toggle="modal"><i class="fa fa-user"></i> Login</button> --}}
-
-
                             </div>
                         </div>
                     </div>
@@ -142,11 +140,11 @@
 
         <div class="container">
             @if (session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>{{session('success')}}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{session('success')}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
 
             <div class="row">
                 <div class="col-lg-3">
@@ -158,7 +156,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="./shop-grid.html">Shop</a></li>
+                            <li><a href="{{route('shop.pages')}}">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
@@ -196,8 +194,6 @@
         </div>
     </header>
     <!-- Header Section End -->
-
-
 
     @yield('fontend_content')
 

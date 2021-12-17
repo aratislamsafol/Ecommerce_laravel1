@@ -93,6 +93,10 @@ Route::get('wl/destroy/{id}','WishlistController@Remove');
 // ============================ Product Details ============================================
 Route::get('product/details/{id}','FontendController@ProductDetails');
 Route::get('coupon/destroy','CartController@CouponDestroy');
+Route::get('shop','FontendController@ShopShow')->name('shop.pages');
+
+// CategoryWise Product Show
+Route::get('category/show/all_items/{id}','FontendController@CategoryWiseShow');
 
 // ============================ Checkout ============================================
 Route::get('checkout','CheckoutController@Index');
@@ -100,4 +104,22 @@ Route::get('checkout','CheckoutController@Index');
 // ============================ Order Data ==========================================
 Route::post('place/order','OrderController@StoreData');
 Route::get('order/success','OrderController@SuccessPages');
+Route::get('total/orders','OrderController@OrderCart')->name('orders');
+Route::get('order/item/show/{id}','OrderController@OrderFontendShow');
+
+// ==================SSl Commerze====================
+// SSLCOMMERZ Start
+Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
+
 

@@ -25,4 +25,20 @@ class FontendController extends Controller
         $related_pro=Product::where('category_id',$categories_id)->where('id','!=',$product_id)->latest()->get();
         return view('pages.product_details',compact('product_details','related_pro'));
      }
+
+// ================================Shop Page========================================
+     public function ShopShow(){
+         $category=Category::where('status',1)->get();
+         $products=Product::where('status',1)->latest()->get();
+         $lts2=Product::where('status',1)->latest()->skip(3)->limit(3)->get();
+         $productrtl=Product::where('status',1)->paginate(9);
+         return view('pages.shop',compact('category','products','productrtl','lts2'));
+     }
+
+     public function CategoryWiseShow($id){
+         $category=Category::where('status',1)->latest()->get();
+        $products=Product::where('category_id',$id)->latest()->paginate(9);
+        $lts2=Product::where('status',1)->latest()->skip(3)->limit(3)->get();
+         return view('pages.categoryshow',compact('category','products','lts2'));
+     }
 }

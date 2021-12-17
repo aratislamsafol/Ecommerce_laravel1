@@ -96,17 +96,37 @@
         <div class="col-sm-8">
           <div class="card">
             <div class="card-body">
-                <form>
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">User Name</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" value="{{Auth::user()->name}}" aria-describedby="emailHelp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" value="{{Auth::user()->email}}" aria-describedby="emailHelp">
-                      </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </form>
+                <table class="table table-dark table-hover">
+                    <thead>
+                        <tr>
+                          <th scope="col">invoice_no</th>
+                          <th scope="col">payment_type</th>
+                          <th scope="col">total</th>
+                          <th scope="col">coupon_discount</th>
+                          <th scope="col">subtotal</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          @foreach ($orders as $order)
+                            <tr>
+                                <th scope="row">{{$order->invoice_no}}</th>
+                                <td>{{$order->payment_type}}</td>
+                                <td>{{$order->total}}</td>
+                                <td>
+                                    @if ($order->coupon_discount == NULL)
+                                        <span class="badge badge-success">NO</span>
+                                    @else
+                                        <span class="badge badge-warning">Yes-{{$order->coupon_discount}}%</span>
+                                    @endif
+                                </td>
+                                <td>{{$order->subtotal}}</td>
+                                <td><a href="{{url('order/item/show/'.$order->id)}}"><i class="fa fa-eye"></i></a></td>
+                            </tr>
+                          @endforeach
+
+                    </tbody>
+                </table>
             </div>
           </div>
         </div>

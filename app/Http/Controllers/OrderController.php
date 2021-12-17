@@ -77,5 +77,19 @@ class OrderController extends Controller
         return view('pages.complete_checkout');
     }
 
+    public function OrderCart(){
+        $orders=Order::where('user_id',Auth::id())->latest()->get();
+
+        return view('pages.profile.order',compact('orders'));
+    }
+
+    public function OrderFontendShow($id){
+        $order=Order::findOrFail($id);
+        $order_item=Order_item::with('Product')->where('order_id',$id)->get();
+        $shipping=Shipping::where('order_id',$id)->first();
+
+        return view('pages.profile.view',compact('order','order_item','shipping'));
+    }
+
 
 }
