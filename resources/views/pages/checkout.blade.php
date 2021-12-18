@@ -212,7 +212,11 @@
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                                <button type="submit" class="site-btn">PLACE ORDER</button>
+                                <button type="submit" id="sslczPayBtn"
+                                token="if you have any token validation"
+                                postdata="your javascript arrays or objects which requires in backend"
+                                order="If you already have the transaction generated for current order"
+                                endpoint="{{ url('/pay-via-ajax') }}" class="site-btn">PLACE ORDER</button>
                             </div>
                         </div>
                     </div>

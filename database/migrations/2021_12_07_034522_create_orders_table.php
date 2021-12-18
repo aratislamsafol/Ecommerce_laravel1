@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('total');
             $table->integer('coupon_discount')->nullable();
             $table->string('subtotal');
+            $table->string('status');
             $table->timestamps();
         });
     }
